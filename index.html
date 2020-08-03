@@ -10,24 +10,47 @@
             <input type="button" id="login" value="Login"/>
         <form>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     </body>
     <script>
        
         var Sesion = document.getElementById('Sesion').value;
         var SToken = document.getElementById('SToken').value;
-
-        document.getElementById('login').addEventListener("click",function(){
+        
+         document.getElementById('login').addEventListener("click",function(){
 
             var url = 'https://galicia-dev.aper.cloud/login/callback';
             var data = {Sesion: Sesion,SToken: SToken };
-console.log(JSON.stringify(data));
-            fetch(url, {
+
+            $.ajax({
+                // En data puedes utilizar un objeto JSON, un array o un query string
+                data: JSON.stringify(data),
+                //Cambiar a type: POST si necesario
+                type: "POST",
+                // Formato de datos que se espera en la respuesta
+                dataType: "json",
+                // URL a la que se enviará la solicitud Ajax
+                url: url,
+            })
+            .done(function( data, textStatus, jqXHR ) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud se ha completado correctamente." );
+                }
+            })
+            .fail(function( jqXHR, textStatus, errorThrown ) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud a fallado: " +  textStatus);
+                }
+            });
+
+
+/*            fetch(url, {
             method: 'POST', 
             body: JSON.stringify(data), 
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-        });
+            .then(response => console.log('Success:', response));*/
+        }); 
        
     </script>
     </html>
