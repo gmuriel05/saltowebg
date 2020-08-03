@@ -17,7 +17,7 @@
         var SToken = document.getElementById('SToken').value;
 
         document.getElementById('login').addEventListener("click",function(){
-            
+
             var url = 'https://galicia-dev.aper.cloud/login/callback';
             var data = {Sesion: Sesion,SToken: SToken };
 console.log(JSON.stringify(data));
@@ -25,7 +25,8 @@ console.log(JSON.stringify(data));
             method: 'POST', 
             body: JSON.stringify(data), 
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
             }
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
