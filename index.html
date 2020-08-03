@@ -27,6 +27,7 @@ console.log(JSON.stringify(data));
             headers:{
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'mode':'no-cors'
             }
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
